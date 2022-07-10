@@ -1,0 +1,6 @@
+/*General properties*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
