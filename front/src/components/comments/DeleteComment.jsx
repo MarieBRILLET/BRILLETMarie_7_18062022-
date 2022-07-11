@@ -33,7 +33,7 @@ class DeleteComment extends React.Component {
 
         const commentId = this.props.match.params.id;
 
-        fetch(('http://localhost:3000/api/comments/' + commentId), requestOptions)
+        fetch(('http://localhost:8000/api/comments/' + commentId), requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 

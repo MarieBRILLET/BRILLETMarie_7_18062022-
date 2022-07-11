@@ -14,7 +14,7 @@ const Articles = () => {
     let token = "Bearer " + storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:3000/api/articles", 
+      fetch("http://localhost:8000/api/articles", 
         {headers: 
             {"Authorization" : token}
         })
@@ -32,7 +32,7 @@ const Articles = () => {
     }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/users/", 
+        fetch("http://localhost:8000/api/users/", 
             {headers: 
                 {"Authorization" : token}
             })
@@ -65,7 +65,7 @@ const Articles = () => {
                         <div className="article-card" key={"articleCard" + article.id}>
                             {users.map((user) => {
                                     if (user.id === article.userId && user.imageUrl) {
-                                    return <img src={"http://localhost:3000/images/" + user.imageUrl} alt="user" key={"userImage" + article.id} />
+                                    return <img src={"http://localhost:8000/images/" + user.imageUrl} alt="user" key={"userImage" + article.id} />
                                     } else if (user.id === article.userId && !user.imageUrl) {
                                         return <img src={img} alt="user" key={"userImage" + article.id} />
                                     } else {

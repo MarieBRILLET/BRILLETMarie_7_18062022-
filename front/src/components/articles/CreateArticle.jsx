@@ -46,7 +46,7 @@ class CreateArticle extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:3000/api/articles/'), requestOptions)
+        fetch(('http://localhost:8000/api/articles/'), requestOptions)
                 .then(response => response.json())
                 .then(
                     (response) => {

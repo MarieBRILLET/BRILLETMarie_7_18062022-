@@ -17,7 +17,7 @@ const User = () => {
     let token = "Bearer " +  storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:3000/api/users/" + userId,
+      fetch("http://localhost:8000/api/users/" + userId,
         {headers: 
             {"Authorization" : token}
         })
@@ -36,7 +36,7 @@ const User = () => {
     }, [userId, token])
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/users/" + userId + "/articles/" ,
+        fetch("http://localhost:8000/api/users/" + userId + "/articles/" ,
             {headers: 
                 {"Authorization" : token},
             })
@@ -84,7 +84,7 @@ const User = () => {
                     <div className="images">
                     {user.imageUrl ?
                     <img
-                        src={"http://localhost:3000/images/" + user.imageUrl}
+                        src={"http://localhost:8000/images/" + user.imageUrl}
                         alt="user"
                         key={"userImage" + user.id}
                     /> : 

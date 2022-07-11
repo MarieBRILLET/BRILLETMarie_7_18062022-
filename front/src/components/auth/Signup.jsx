@@ -90,7 +90,7 @@ class Signup extends React.Component {
                 body: JSON.stringify(this.state)
             };
     
-            fetch('http://localhost:3000/api/auth/signup/', requestOptions)
+            fetch('http://localhost:8000/api/auth/signup/', requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 

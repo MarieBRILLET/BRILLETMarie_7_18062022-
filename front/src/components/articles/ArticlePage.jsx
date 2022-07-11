@@ -22,7 +22,7 @@ function ArticlePage ({ match }) {
     let articleId = match.params.id;
 
     useEffect(() => {
-      fetch("http://localhost:3000/api/articles/" + articleId, 
+      fetch("http://localhost:8000/api/articles/" + articleId, 
         {headers: 
             {"Authorization" : token}
         })
@@ -41,7 +41,7 @@ function ArticlePage ({ match }) {
     }, [articleId, token])
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/users/", 
+        fetch("http://localhost:8000/api/users/", 
             {headers: 
                 {"Authorization" : token}
             })
@@ -59,7 +59,7 @@ function ArticlePage ({ match }) {
         }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/articles/" + articleId + "/likes/" ,
+        fetch("http://localhost:8000/api/articles/" + articleId + "/likes/" ,
             {headers: 
                 {"Authorization" : token},
             })
@@ -77,7 +77,7 @@ function ArticlePage ({ match }) {
         }, [articleId, token])
 
     function LikeSubmit () {
-        fetch('http://localhost:3000/api/likes/', {
+        fetch('http://localhost:8000/api/likes/', {
             method: 'post',
             headers: { 
                 'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ function ArticlePage ({ match }) {
                 <div className="article-present">
                     {users.map((user) => {
                         if (user.id === article.userId && user.imageUrl) {
-                        return <img src={"http://localhost:3000/images/" + user.imageUrl} alt="user" key={"userImage" + article.id} />
+                        return <img src={"http://localhost:8000/images/" + user.imageUrl} alt="user" key={"userImage" + article.id} />
                         } else if (user.id === article.userId && !user.imageUrl) {
                             return <img src={img} alt="user" key={"userImage" + article.id} />
                         } else {

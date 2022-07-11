@@ -49,7 +49,7 @@ class UpdateArticle extends React.Component {
         let articlePage = JSON.parse(localStorage.getItem('articlePage'));
         let articleId = articlePage.id;
 
-        fetch(('http://localhost:3000/api/articles/' + articleId), requestOptions)
+        fetch(('http://localhost:8000/api/articles/' + articleId), requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 

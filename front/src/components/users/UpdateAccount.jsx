@@ -47,7 +47,7 @@ class UpdateAccount extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:3000/api/users/' + userId), requestOptions)
+        fetch(('http://localhost:8000/api/users/' + userId), requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 
