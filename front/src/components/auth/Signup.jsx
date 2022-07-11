@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 class Signup extends React.Component {
 
@@ -90,7 +90,7 @@ class Signup extends React.Component {
                 body: JSON.stringify(this.state)
             };
     
-            fetch('http://localhost:8000/api/auth/signup/', requestOptions)
+            fetch('http://localhost:3000/api/auth/signup/', requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 
@@ -114,7 +114,7 @@ class Signup extends React.Component {
     render() {
         const { redirection } = this.state;
         if (redirection) {
-            return <Redirect to='/login'/>;
+            return <Route to='/login'/>;
         }
 
         const {errors} = this.state;

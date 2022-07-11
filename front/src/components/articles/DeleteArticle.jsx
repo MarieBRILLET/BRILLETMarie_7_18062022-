@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 
 class DeleteArticle extends React.Component {
     state = { redirection: false };
@@ -34,7 +34,7 @@ class DeleteArticle extends React.Component {
         let articlePage = JSON.parse(localStorage.getItem('articlePage'));
         let articleId = articlePage.id
 
-        fetch(('http://localhost:8000/api/articles/' + articleId), requestOptions)
+        fetch(('http://localhost:3000/api/articles/' + articleId), requestOptions)
                 .then(response => response.json())
                 .then(
                     (response) => {
@@ -58,7 +58,7 @@ class DeleteArticle extends React.Component {
     render () {
         const { redirection } = this.state;
         if (redirection) {
-            return <Redirect to='/articles' />;
+            return <Route to='/articles' />;
         }
 
         return <React.Fragment>

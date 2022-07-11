@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
 
@@ -8,13 +8,13 @@ const Articles = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [articles, setArticles] = useState([]);
     const [users, setUsers] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     let token = "Bearer " + storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:8000/api/articles", 
+      fetch("http://localhost:3000/api/articles", 
         {headers: 
             {"Authorization" : token}
         })
@@ -32,7 +32,7 @@ const Articles = () => {
     }, [token])
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/users/", 
+        fetch("http://localhost:3000/api/users/", 
             {headers: 
                 {"Authorization" : token}
             })
@@ -59,13 +59,13 @@ const Articles = () => {
                 <div className="container">
                     <h1>Tous les articles publiés</h1>
                     <div className="form-submit">
-                        <button className="btn btn-outline-info btn-sm" onClick={() => {history.push("/createarticle/")}}>Publier un article</button>
+                        <button className="btn btn-outline-info btn-sm" onClick={() => {navigate("/createarticle/")}}>Publier un article</button>
                     </div>
                     {articles.map((article) => (
                         <div className="article-card" key={"articleCard" + article.id}>
                             {users.map((user) => {
                                     if (user.id === article.userId && user.imageUrl) {
-                                    return <img src={"http://localhost:8000/images/" + user.imageUrl} alt="user" key={"userImage" + article.id} />
+                                    return <img src={"http://localhost:3000/images/" + user.imageUrl} alt="user" key={"userImage" + article.id} />
                                     } else if (user.id === article.userId && !user.imageUrl) {
                                         return <img src={img} alt="user" key={"userImage" + article.id} />
                                     } else {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Route} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 class ImageUpdate extends React.Component {
@@ -52,7 +52,7 @@ class ImageUpdate extends React.Component {
 
         const { redirect } = this.state;
         if (redirect) {
-         return <Redirect to={'/user/' + userId}/>;
+         return <Route to={'/user/' + userId}/>;
       }
 
     return <div className="container">

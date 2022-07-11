@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Redirect, Link} from 'react-router-dom';
-import Field from '../Form/Field';
+import {Route, Link} from 'react-router-dom';
+import Field from '../form/Field';
 import Form from 'react-bootstrap/Form'
 
 class UpdateArticle extends React.Component {
@@ -49,7 +49,7 @@ class UpdateArticle extends React.Component {
         let articlePage = JSON.parse(localStorage.getItem('articlePage'));
         let articleId = articlePage.id;
 
-        fetch(('http://localhost:8000/api/articles/' + articleId), requestOptions)
+        fetch(('http://localhost:3000/api/articles/' + articleId), requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 
@@ -70,7 +70,7 @@ class UpdateArticle extends React.Component {
         const { redirection } = this.state;
         const articleId = this.props.match.params.id;
         if (redirection) {
-            return <Redirect to={'/article/' + articleId}/>;
+            return <Route to={'/article/' + articleId}/>;
         }
 
         return <React.Fragment>

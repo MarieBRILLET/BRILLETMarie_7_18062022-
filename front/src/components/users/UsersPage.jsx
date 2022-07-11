@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
 
@@ -8,14 +8,14 @@ const UsersPage = ({match}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [user, setUser] = useState([]);
     const [articles, setArticle] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     const userId = match.params.id;
     let token = "Bearer " +  storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:8000/api/users/" + userId,
+      fetch("http://localhost:3000/api/users/" + userId,
         {headers: 
             {"Authorization" : token}
         })
@@ -34,7 +34,7 @@ const UsersPage = ({match}) => {
     }, [userId, token])
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/users/" + userId + "/articles/" ,
+        fetch("http://localhost:3000/api/users/" + userId + "/articles/" ,
             {headers: 
                 {"Authorization" : token},
             })
@@ -60,7 +60,7 @@ const UsersPage = ({match}) => {
         return <div>Chargement...</div>;
     } else if (storage.userAdmin === true) {
         idUser = <div className="user-button">
-            <button className="btn btn-outline-danger btn-sm" onClick={() => {history.push("/adminuserdelete/" + userId)}}>Supprimer</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => {navigate("/adminuserdelete/" + userId)}}>Supprimer</button>
         </div>
     }
 
@@ -72,7 +72,7 @@ const UsersPage = ({match}) => {
                     <div className="images">
                         {user.imageUrl ?
                             <img
-                                src={"http://localhost:8000/images/" + user.imageUrl}
+                                src={"http://localhost:3000/images/" + user.imageUrl}
                                 alt="user"
                                 key={"userImage" + user.id}
                             /> : 

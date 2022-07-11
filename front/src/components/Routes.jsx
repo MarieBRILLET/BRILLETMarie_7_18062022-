@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Routes, Route } from 'react-router-dom';
 
 //imports components
 import AuthApi from './AuthApi';
@@ -19,34 +19,34 @@ import DeleteArticle from './articles/DeleteArticle';
 import DeleteComment from './comments/DeleteComment';
 import ImageUpdate from './images/ImageUpdate';
 
-const Routes = () => {
+const AllRoutes = () => {
     
     const Auth = React.useContext(AuthApi)
 
     return (
-        <Switch>
+        <Routes>
             <ProtectedLogin path="/" exact component={Home} />
             <ProtectedLogin path="/signup" component={Signup} />
             <ProtectedLogin path="/login" component={Login} auth={Auth.auth} />
             <ProtectedRoute path="/articles" auth={Auth.auth} component={Articles} />
             <ProtectedRoute path="/user/:id" auth={Auth.auth} component={User} />
             <ProtectedRoute path="/userdelete/:id" auth={Auth.auth} component={DeleteAccount} />
-            <Route path="/userupdate/:id" auth={Auth.auth} component={UpdateAccount} />
-            <Route path="/users/:id" auth={Auth.auth} component={UsersPage} />
-            <Route path="/createarticle" auth={Auth.auth} component={CreateArticle} />
-            <Route path="/article/:id" auth={Auth.auth} component={ArticlePage} />
-            <Route path="/articleupdate/:id" auth={Auth.auth} component={UpdateArticle} />
-            <Route path="/articledelete/:id" auth={Auth.auth} component={DeleteArticle} />
-            <Route path="/deletecomment/:id" auth={Auth.auth} component={DeleteComment} />
-            <Route path="/imageupdate/:id" auth={Auth.auth} component={ImageUpdate} />
-            <Route path="/adminuserdelete/:id" auth={Auth.auth} component={DeleteUserAccount} />
-        </Switch>
+            <Router path="/userupdate/:id" auth={Auth.auth} component={UpdateAccount} />
+            <Router path="/users/:id" auth={Auth.auth} component={UsersPage} />
+            <Router path="/createarticle" auth={Auth.auth} component={CreateArticle} />
+            <Router path="/article/:id" auth={Auth.auth} component={ArticlePage} />
+            <Router path="/articleupdate/:id" auth={Auth.auth} component={UpdateArticle} />
+            <Router path="/articledelete/:id" auth={Auth.auth} component={DeleteArticle} />
+            <Router path="/deletecomment/:id" auth={Auth.auth} component={DeleteComment} />
+            <Router path="/imageupdate/:id" auth={Auth.auth} component={ImageUpdate} />
+            <Router path="/adminuserdelete/:id" auth={Auth.auth} component={DeleteUserAccount} />
+        </Routes>
     )
 }
 
 const ProtectedLogin = ({auth, component: Component, ...rest}) => {
     return(
-        <Route 
+        <Router 
         {...rest}
         render = {() => !auth? (
             <>
@@ -54,7 +54,7 @@ const ProtectedLogin = ({auth, component: Component, ...rest}) => {
             </>
         ) :
             (
-                <Redirect to="/articles" />
+                <Route to="/articles" />
             )
             }
         />
@@ -63,7 +63,7 @@ const ProtectedLogin = ({auth, component: Component, ...rest}) => {
 
 const ProtectedRoute = ({auth, component: Component, ...rest}) => {
     return(
-        <Route 
+        <Router 
         {...rest}
         render = {() => auth? (
             <>
@@ -71,11 +71,11 @@ const ProtectedRoute = ({auth, component: Component, ...rest}) => {
             </>
         ) :
             (
-                <Redirect to="/login" />
+                <Route to="/login" />
             )
             }
         />
     )
 }
 
-export default Routes;
+export default AllRoutes;

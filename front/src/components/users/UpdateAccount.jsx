@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Redirect, Link} from 'react-router-dom';
-import Field from '../Form/Field';
+import {Route, Link} from 'react-router-dom';
+import Field from '../form/Field';
 import Form from 'react-bootstrap/Form'
 
 class UpdateAccount extends React.Component {
@@ -47,7 +47,7 @@ class UpdateAccount extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:8000/api/users/' + userId), requestOptions)
+        fetch(('http://localhost:3000/api/users/' + userId), requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 
@@ -69,7 +69,7 @@ class UpdateAccount extends React.Component {
         const { redirection } = this.state;
 
         if (redirection) {
-            return <Redirect to={'/user/' + userId}/>;
+            return <Route to={'/user/' + userId}/>;
         }
 
         return <React.Fragment>

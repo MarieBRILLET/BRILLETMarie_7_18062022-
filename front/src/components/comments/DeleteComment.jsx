@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Redirect, Link} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 
 class DeleteComment extends React.Component {
     state = { redirection: false };
@@ -33,7 +33,7 @@ class DeleteComment extends React.Component {
 
         const commentId = this.props.match.params.id;
 
-        fetch(('http://localhost:8000/api/comments/' + commentId), requestOptions)
+        fetch(('http://localhost:3000/api/comments/' + commentId), requestOptions)
                 .then(response => response.json())
                 .then((response) => {
                     if (response.error) { 
@@ -56,7 +56,7 @@ class DeleteComment extends React.Component {
         
         const { redirection } = this.state;
         if (redirection) {
-            return <Redirect to={'/article/' + articleId}/>;
+            return <Route to={'/article/' + articleId}/>;
         }
 
         return <React.Fragment>

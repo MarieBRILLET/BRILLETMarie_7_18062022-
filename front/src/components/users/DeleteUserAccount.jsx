@@ -1,5 +1,5 @@
 import React, { useState, useCallback} from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 function DeleteUserAccount ({ match }) {
     const [redirect, setRedirect] = useState(false);
@@ -9,7 +9,7 @@ function DeleteUserAccount ({ match }) {
 
     const handleSubmit = useCallback(function (value) {
 
-        fetch(('http://localhost:8000/api/users/' + userId), {
+        fetch(('http://localhost:3000/api/users/' + userId), {
             method: "delete",
             headers: 
                 { "Content-type" : 'application/json',
@@ -41,7 +41,7 @@ function DeleteUserAccount ({ match }) {
 
     return (
         <React.Fragment>
-            {redirect ? <Redirect to="/articles/" /> : null}
+            {redirect ? <Route to="/articles/" /> : null}
             <div className="container">
                 <h1>Souhaitez vous vraiment supprimer ce compte ?</h1>
                 <div className="form-submit">

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {Redirect, Link} from 'react-router-dom';
-import Field from '../Form/Field';
+import {Route, Link} from 'react-router-dom';
+import Field from '../form/Field';
 import Form from 'react-bootstrap/Form'
 
 class CreateArticle extends React.Component {
@@ -46,7 +46,7 @@ class CreateArticle extends React.Component {
             body: JSON.stringify(this.state)
         };
 
-        fetch(('http://localhost:8000/api/articles/'), requestOptions)
+        fetch(('http://localhost:3000/api/articles/'), requestOptions)
                 .then(response => response.json())
                 .then(
                     (response) => {
@@ -66,7 +66,7 @@ class CreateArticle extends React.Component {
     render() {
         const { redirection } = this.state;
         if (redirection) {
-            return <Redirect to='/articles' />;
+            return <Route to='/articles' />;
         }
 
         return <React.Fragment>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Moment from 'react-moment';
 import img from '../../images/icon.png';
 import AuthApi from '../AuthApi';
@@ -10,14 +10,14 @@ const User = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [user, setUser] = useState([]);
     const [articles, setArticle] = useState([]);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const storage = JSON.parse(localStorage.getItem('userConnect'));
     const userId = storage.userId;
     let token = "Bearer " +  storage.token;
 
     useEffect(() => {
-      fetch("http://localhost:8000/api/users/" + userId,
+      fetch("http://localhost:3000/api/users/" + userId,
         {headers: 
             {"Authorization" : token}
         })
@@ -36,7 +36,7 @@ const User = () => {
     }, [userId, token])
 
     useEffect(() => {
-        fetch("http://localhost:8000/api/users/" + userId + "/articles/" ,
+        fetch("http://localhost:3000/api/users/" + userId + "/articles/" ,
             {headers: 
                 {"Authorization" : token},
             })
@@ -68,8 +68,8 @@ const User = () => {
         return <div>Chargement...</div>;
     } else if (user.id === userId || user.isAdmin === true) {
         idUser = <div className="user-button">
-            <button className="btn btn-outline-info btn-sm" onClick={() => {history.push("/userupdate/" + userId)}}>Modifier</button>
-            <button className="btn btn-outline-danger btn-sm" onClick={() => {history.push("/userdelete/" + userId)}}>Supprimer</button>
+            <button className="btn btn-outline-info btn-sm" onClick={() => {navigate("/userupdate/" + userId)}}>Modifier</button>
+            <button className="btn btn-outline-danger btn-sm" onClick={() => {navigate("/userdelete/" + userId)}}>Supprimer</button>
             <button className="btn btn-outline-dark btn-sm" onClick={handleOnclick}>Déconnecter</button>  
         </div>
     }
@@ -84,7 +84,7 @@ const User = () => {
                     <div className="images">
                     {user.imageUrl ?
                     <img
-                        src={"http://localhost:8000/images/" + user.imageUrl}
+                        src={"http://localhost:3000/images/" + user.imageUrl}
                         alt="user"
                         key={"userImage" + user.id}
                     /> : 
@@ -94,7 +94,7 @@ const User = () => {
                         key={"userImage" + user.id}
                     />
                     }
-                        <button className="btn btn-outline-info btn-sm" onClick={() => {history.push("/imageupdate/" + userId)}}>Modifier</button>
+                        <button className="btn btn-outline-info btn-sm" onClick={() => {navigate("/imageupdate/" + userId)}}>Modifier</button>
                     </div>
                     <div className= "show-article">
                         <h2>{user.firstname} {user.lastname}</h2>
